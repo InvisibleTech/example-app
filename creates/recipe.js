@@ -13,7 +13,12 @@ module.exports = {
 
   // `operation` is where the business logic goes.
   operation: {
-    inputFields: [{ key: "name", required: true, type: "string" }],
+    inputFields: [
+      { key: "name", required: true, type: "string" },
+      { key: "id", required: true, type: "string" },
+      { key: "rank", required: true, type: "string" },
+      { key: "createdAt", required: true, type: "string" },
+    ],
     perform: (z, bundle) => {
       z.console.log(">>>>>>>>>>>>>>>>>>>>>>>>>  Performing POST with bundle");
       z.console.log(bundle);
@@ -25,7 +30,10 @@ module.exports = {
         url: "https://op-rule-hook-spike.herokuapp.com/dump_req_allow",
         method: "POST",
         body: {
+          id: bundle.inputData.id,
           name: bundle.inputData.name,
+          rank: bundle.inputData.rank,
+          createdAt: bundle.inputData.createdAt,
         },
         headers: {
           "content-type": "application/json",
